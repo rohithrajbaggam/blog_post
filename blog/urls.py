@@ -16,6 +16,7 @@ Including another URLconf
 
 from django.urls import path
 from . import views
+from django.contrib.auth.decorators import login_required, permission_required
 from .views import (PostListView, 
                     PostDetailView, 
                     UserPostListView,
@@ -23,12 +24,13 @@ from .views import (PostListView,
                     PostUpdateView,
                     PostDeleteView)
 urlpatterns = [
-    path('', PostListView.as_view(), name='home'),
-     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
-    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+    path('', login_required(PostListView.as_view()), name='home'),
+    path('user/<str:username>', login_required(UserPostListView.as_view()), name='user-posts'),
+    path('post/<int:pk>/', login_required(PostDetailView.as_view()), name='post-detail'),
+    path('post/<int:pk>/update/', login_required(PostUpdateView.as_view()), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('search/', views.search, name='search'),
     path('about/', views.about, name='about'),
+    path('UserPostPage/', login_required(views.UserPostPage), name='userpostpage'),
 ]

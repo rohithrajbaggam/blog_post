@@ -33,15 +33,12 @@
               
               {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'profile'%}">profile</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'profile-view'%}">My Profile</a>
               </li> 
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'post-create'%}">New Post</a>
-              </li> 
+              
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'logout'%}">Logout</a>
               </li>
-              
               {% else %} 
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
@@ -69,8 +66,10 @@
       </div>
       {% endfor %} 
       {% endif %}
-        {% block content %} 
-   {% endblock %}
+      
+          <div class="col-md-8">
+            {% block content %}{% endblock %}
+          </div>
 
     </div>
     <!-- Optional JavaScript; choose one of the two! -->

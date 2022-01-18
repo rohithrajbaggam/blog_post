@@ -1,21 +1,69 @@
 {% extends 'blog/base.html' %}
 {% block content %}
     
-        <article class="media content-section">
-            <div class="media-body">
-            <div class="article-metadata">
-                <a class="mr-2" href="{%url 'user-posts' post.author.username %}">{{ object.author }}</a>
-                <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-                {% if object.author == user %}
-                <div>
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{%url 'post-update' object.id%}">Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{%url 'post-delete' object.id%}">Delete</a>
-                {% endif %} 
-            </div>
-            </div>
-            <h2 class="article-title" >{{ object.title }}</h2>
-            <p class="article-content">{{ object.content }}</p>
-            </div>
-        </article>
+
+<article class="media content-section">
+
+    <div class="media-body">
+    <div class="article-metadata">
+        <a class="mr-2" href="{%url 'user-posts' post.user_posted.username %}">{{ post.user_posted }}</a>
+        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+    </div>
+    {% if  post.name %}
+    <h2><a class="article-title" href="{%url 'post-detail' post.id%}"><b>Name : </b>{{ post.name }}</a></h2>
+    {% endif %}
+    {% if  post.uid %}
+    <p class="article-content"> <b>Uid : </b> {{ post.uid }}</p>
+    {% endif %}
+    {% if  post.section %}
+    <p class="article-content"><b>Section : </b>{{ post.section }}</p>
+    {% endif %}
+    {% if  post.semster %}
+    <p class="article-content"><b>Semster : </b>{{ post.semster }}</p>
+    {% endif %}
+    {% if  post.hostel_or_Home %}
+    <p class="article-content"><b>Home or Hostel</b>{{ post.hostel_or_Home }}</p>
+    {% endif %}
+    {% if  post.hostel_number %}
+    <p class="article-content"><b>Hostel Room No : </b>{{ post.hostel_number }}</p>
+    {% endif %}
+    {% if  post.native_language %}
+    <p class="article-content"><b>Native Language : </b>{{ post.native_language }}</p>
+    {% endif %}
+    {% if  post.languages_known %}
+    <p class="article-content"><b>languages_known : </b>{{ post.languages_known }}</p>
+    {% endif %}
+    {% if  post.hoddies %}
+    <p class="article-content"><b>Hoddiess : </b>{{ post.hoddies }}</p>
+    {% endif %}
+    {% if  post.address %}
+    <p class="article-content"><b>Address : </b>{{ post.address }}</p>
+    {% endif %}
+    {% if  post.state %}
+    <p class="article-content"><b>State : </b>{{ post.state }}</p>
+    {% endif %}
+    {% if  post.country %}
+    <p class="article-content"><b>Country : </b>{{ post.country }}</p>
+    {% endif %}
+    </div>
+    <hr>
+    <div>
+        <b>Social Media</b>
+
+    {% if  post.whatsapp %}
+        <a href="https://wa.me/{{post.whatsapp}}" target="_blank">WhatsApp</a>
+        {% endif %}
+    {% if  post.instagram %}
+        <a href="https://instagram.com/{{post.instagram}}" target="_blank">Instgram</a>
+        {% endif %}
+    {% if  post.gmail %}
+        <a href="mailto:{{post.gmail}}" target="_blank">Gmail</a>
+        {% endif %}
+    {% if  post.linkdin %}
+        <a href="{{post.linkdin}}" target="_blank">Linkdin</a>
+        {% endif %}
+    </div>
+</article>
+
     
 {% endblock %}

@@ -8,23 +8,14 @@
             <p class="text-secondary">{{user.email}}</p>
         </div>
         </div>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %} 
-            <fieldset class='form-group'>
-                <legend class="border-bottom mb-4">Profile Info</legend>
-                {{ u_form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type='submit'>Update</button>
-            </div>
-        </form>
     </div>
-   <div>  
+   <div>
        <h1>My Post</h1>
     {% if posts %}
-    {% for post in posts %} 
 
-    <button type="button" class="btn btn-info" ><a href="{% url 'post-update' post.id %}">Update</a></button> <button type="button" class="btn btn-danger" ><a href="{% url 'post-delete' post.id %}">Delete</a></button>
+        <a class="nav-link active" aria-current="page" href="{% url 'profile'%}">Profile Update</a>
+
+    {% for post in posts %} 
         <article class="media content-section">
             <div class="media-body">
             <div class="article-metadata">
@@ -90,8 +81,7 @@
     {% else %}
     <br>
     <h5>You have No Posts yet Upload Your Profile</h5>
-
-    <button type="button" class="btn btn-outline-info"  ><a href="{% url 'post-create' %}" style="text-decoration: none; color:rgb(13, 14, 14)">Create Post</a></button>
+    <button type="button" class="btn btn-info" ><a href="{% url 'post-create' %}">Create Post</a></button>
 
     {% endif  %}
     

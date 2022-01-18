@@ -21,16 +21,34 @@ def register(request):
 
 @login_required
 def profile(request):
+    request_user = request.user
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
+        u_form = UserUpdateForm(request.POST,   instance=request.user)
+
         if u_form.is_valid():
             messages.success(request, 'Your Profile has been Updated')
             u_form.save()
+
             return redirect('profile')
-    else:
+    else: 
         u_form = UserUpdateForm(instance=request.user)
+
     context = {
         'u_form' : u_form,
-        'posts' : Post.objects.all(),
+
+        'posts' : Post.objects.filter(user_posted=request_user),
     }
     return render(request, 'users/profile.html', context)
+
+
+@login_required
+def profile_view(request):
+    request_user = request.user
+    posts = Post.objects.filter(user_posted=request_user)
+
+    context = {
+        'posts': posts,
+        'req_user' : request_user,
+        'title': 'My Profile',
+    }
+    return render(request, 'users/profile_view.html', context)
